@@ -13,6 +13,7 @@
     double operand;
     double waitingOperand;
     NSString *waitingOperation;
+    double memory;
 }
 
 - (void)setOperand:(double)aDouble;
