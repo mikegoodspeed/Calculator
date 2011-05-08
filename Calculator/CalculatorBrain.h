@@ -17,6 +17,18 @@
 }
 
 - (void)setOperand:(double)aDouble;
+- (void)setVariableAsOperand:(NSString *)variableName;
 - (double)performOperation:(NSString *)operation;
+
+@property (readonly) id expression;
+
++ (double)evaluateExpression:(id)anExpression
+              usingVariables:(NSDictionary *)variables;
+
++ (NSSet *)variablesInExpression:(id)anExpression;
++ (NSString *)descriptionOfExpression:(id)anExpression;
+
++ (id)propertyListForExpression:(id)anExpression;
++ (id)expressionForPropertyList:(id)propertyList;
 
 @end

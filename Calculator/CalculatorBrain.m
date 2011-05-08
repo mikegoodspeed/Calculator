@@ -75,6 +75,7 @@
     }
     else if ([operation isEqual:@"C"])
     {
+        [waitingOperation release];
         waitingOperand = 0;
         waitingOperation = nil;
         memory = 0;
@@ -84,8 +85,16 @@
     {
         [self performWaitingOperation];
         waitingOperation = operation;
+        [waitingOperation retain];
         waitingOperand = operand;
     }
     return operand;
 }
+
+- (void) dealloc
+{
+    [waitingOperation release];
+    [super dealloc];
+}
+
 @end
