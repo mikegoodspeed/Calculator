@@ -8,11 +8,56 @@
 
 #import "CalculatorBrain.h"
 
-
 @implementation CalculatorBrain
+
+#pragma Class Methods
+
++ (NSString *)descriptionOfExpression:(id)anExpression
+{
+    NSMutableString *output = [NSMutableString new];
+    for (id item in anExpression)
+    {
+        if ([item isKindOfClass:[NSString class]])
+        {
+            [output appendString:item];
+        }
+        else if ([item isKindOfClass:[NSNumber class]])
+        {
+            [output appendString:[item stringValue]];
+        }
+        [output appendString:@" "];
+    }
+    return [output autorelease];
+}
+
+- (id)init
+{
+    if ((self = [super init]))
+    {
+        internalExpression = [NSMutableArray new];
+    }
+    return self;
+}
+
+#pragma Properties
+
+- (id)expression
+{
+    return [NSArray arrayWithArray:internalExpression];
+}
+
+#pragma Memory
+
+- (void) dealloc
+{
+    [waitingOperation release];
+    [internalExpression release];
+    [super dealloc];
+}
 
 - (void)setOperand:(double)aDouble
 {
+    [internalExpression addObject:[NSNumber numberWithDouble:aDouble]];
     operand = aDouble;
 }
 
@@ -41,6 +86,17 @@
 
 - (double)performOperation:(NSString *)operation
 {
+    if ([operation isEqual:@"x"] ||
+        [operation isEqual:@"a"] ||
+        [operation isEqual:@"b"])
+    {
+        NSString *vp = @"%";
+        [internalExpression addObject:[vp stringByAppendingString:operation]];
+    }
+    else
+    {
+        [internalExpression addObject:operation];
+    }
     if ([operation isEqual:@"sqrt"])
     {
         operand = sqrt(operand);
@@ -89,12 +145,6 @@
         waitingOperand = operand;
     }
     return operand;
-}
-
-- (void) dealloc
-{
-    [waitingOperation release];
-    [super dealloc];
 }
 
 @end

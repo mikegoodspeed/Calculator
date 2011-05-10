@@ -14,6 +14,7 @@
     double waitingOperand;
     NSString *waitingOperation;
     double memory;
+    id internalExpression;
 }
 
 - (void)setOperand:(double)aDouble;

@@ -14,15 +14,7 @@
 
 @implementation CalculatorViewController
 
-#pragma mark - View lifecycle
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-# pragma mark - Controller Code
+# pragma mark - Properties
 
 - (CalculatorBrain *)brain
 {
@@ -31,6 +23,16 @@
     }
     return brain;
 }
+
+# pragma mark - Memory
+
+- (void)dealloc
+{
+    [brain release];
+    [super dealloc];
+}
+
+#pragma mark - Controler Code
 
 - (IBAction)digitPressed:(UIButton *)sender
 {
@@ -69,12 +71,17 @@
     display.text = [NSString stringWithFormat:@"%g", result];
 }
 
-# pragma mark - Memory allocation
-
-- (void)dealloc
+- (IBAction)setVariableAsOperand:(UIButton *)sender
 {
-    [brain release];
-    [super dealloc];
+    // TODO: implement
+}
+
+- (void)solve
+{
+    NSDictionary *vars = [NSDictionary dictionaryWithObjectsAndKeys:
+                         @"x", 2, @"a", 4, @"b", 6, nil];
+    [CalculatorBrain evaluateExpression:self.brain.expression
+                         usingVariables:vars];
 }
 
 @end
