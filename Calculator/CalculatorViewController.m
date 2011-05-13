@@ -68,12 +68,21 @@
     }
     NSString *operation = sender.titleLabel.text;
     double result = [self.brain performOperation:operation];
-    display.text = [NSString stringWithFormat:@"%g", result];
+    
+    if (brain.containsVariable)
+    {
+        display.text = [CalculatorBrain descriptionOfExpression:brain.expression];
+    }
+    else
+    {
+        display.text = [NSString stringWithFormat:@"%g", result];
+    }
 }
 
 - (IBAction)setVariableAsOperand:(UIButton *)sender
 {
-    // TODO: implement
+    [brain setVariableAsOperand:sender.titleLabel.text];
+    display.text = sender.titleLabel.text;
 }
 
 - (void)solve

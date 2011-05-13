@@ -15,13 +15,16 @@
     NSString *waitingOperation;
     double memory;
     id internalExpression;
+    NSString *variable;
+    BOOL containsVariable_;
 }
 
 - (void)setOperand:(double)aDouble;
 - (void)setVariableAsOperand:(NSString *)variableName;
 - (double)performOperation:(NSString *)operation;
 
-@property (readonly) id expression;
+@property (readonly, nonatomic) id expression;
+@property (readonly, nonatomic) BOOL containsVariable;
 
 + (double)evaluateExpression:(id)anExpression
               usingVariables:(NSDictionary *)variables;
