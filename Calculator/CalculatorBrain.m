@@ -30,7 +30,6 @@
         {
             if ([CalculatorBrain isVariable:item])
             {
-                NSLog(@"variable: %@", [item substringFromIndex:1]);
                 [output appendString:[item substringFromIndex:1]];
             }
             else
@@ -49,13 +48,23 @@
 
 + (NSSet *)variablesInExpression:(id)anExpression
 {
-    NSMutableSet *output = [NSMutableSet set];
+    NSMutableSet *output = [[NSMutableSet alloc] init];
     for (id item in anExpression)
     {
-        if ([CalculatorBrain isVariable:item])
+        if ([item isKindOfClass:[NSString class]] && 
+            [CalculatorBrain isVariable:item])
         {
             [output addObject:[item substringFromIndex:1]];
         }
+    }
+    if ([output count] > 0)
+    {
+        [output autorelease];
+    }
+    else
+    {
+        [output release];
+        output = nil;
     }
     return output;
 }
@@ -103,14 +112,12 @@
 {
     if ((self = [super init]))
     {
-        internalExpression = [NSMutableArray new];
+        internalExpression = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 #pragma Properties
-
-@synthesize containsVariable = containsVariable_;
 
 - (id)expression
 {
@@ -123,7 +130,6 @@
 {
     [waitingOperation release];
     [internalExpression release];
-    [variable release];
     [super dealloc];
 }
 
@@ -131,8 +137,8 @@
 
 - (void)setVariableAsOperand:(NSString *)variableName
 {
-    containsVariable_ = YES;
-    variable = [variableName retain];
+    NSString *vp = @"%";
+    [internalExpression addObject:[vp stringByAppendingString:variableName]];
 }
 
 - (void)setOperand:(double)aDouble
@@ -166,17 +172,7 @@
 
 - (double)performOperation:(NSString *)operation
 {
-    if ([operation isEqual:@"x"] ||
-        [operation isEqual:@"a"] ||
-        [operation isEqual:@"b"])
-    {
-        NSString *vp = @"%";
-        [internalExpression addObject:[vp stringByAppendingString:operation]];
-    }
-    else
-    {
-        [internalExpression addObject:operation];
-    }
+    [internalExpression addObject:operation];
     if ([operation isEqual:@"sqrt"])
     {
         operand = sqrt(operand);
@@ -212,8 +208,7 @@
     else if ([operation isEqual:@"C"])
     {
         [waitingOperation release];
-        [variable release];
-        containsVariable_ = NO;
+        [internalExpression removeAllObjects];
         waitingOperand = 0;
         waitingOperation = nil;
         memory = 0;
@@ -222,8 +217,7 @@
     else
     {
         [self performWaitingOperation];
-        waitingOperation = operation;
-        [waitingOperation retain];
+        waitingOperation = [operation retain];
         waitingOperand = operand;
     }
     return operand;

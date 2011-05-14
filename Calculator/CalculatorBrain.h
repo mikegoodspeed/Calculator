@@ -15,8 +15,6 @@
     NSString *waitingOperation;
     double memory;
     id internalExpression;
-    NSString *variable;
-    BOOL containsVariable_;
 }
 
 - (void)setOperand:(double)aDouble;
@@ -24,7 +22,6 @@
 - (double)performOperation:(NSString *)operation;
 
 @property (readonly, nonatomic) id expression;
-@property (readonly, nonatomic) BOOL containsVariable;
 
 + (double)evaluateExpression:(id)anExpression
               usingVariables:(NSDictionary *)variables;

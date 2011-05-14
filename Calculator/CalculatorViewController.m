@@ -69,7 +69,7 @@
     NSString *operation = sender.titleLabel.text;
     double result = [self.brain performOperation:operation];
     
-    if (brain.containsVariable)
+    if ([CalculatorBrain variablesInExpression:brain.expression])
     {
         display.text = [CalculatorBrain descriptionOfExpression:brain.expression];
     }
@@ -87,10 +87,14 @@
 
 - (void)solve
 {
+    userIsInTheMiddleOfTypingANumber = NO;
     NSDictionary *vars = [NSDictionary dictionaryWithObjectsAndKeys:
-                         @"x", 2, @"a", 4, @"b", 6, nil];
-    [CalculatorBrain evaluateExpression:self.brain.expression
-                         usingVariables:vars];
+                          @"x", [NSNumber numberWithInt:2], 
+                          @"a", [NSNumber numberWithInt:4],
+                          @"b", [NSNumber numberWithInt:6], nil];
+    double result = [CalculatorBrain evaluateExpression:self.brain.expression
+                                         usingVariables:vars];
+    display.text = [NSString stringWithFormat:@"%g", result];
 }
 
 @end
