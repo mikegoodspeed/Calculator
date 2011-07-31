@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		275E087813BF72C600C762B0 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275E087613BF72C600C762B0 /* MainWindow-iPad.xib */; };
 		27ACAB7913730435004F851F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27ACAB7813730435004F851F /* UIKit.framework */; };
 		27ACAB7B13730435004F851F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27ACAB7A13730435004F851F /* Foundation.framework */; };
 		27ACAB7D13730435004F851F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27ACAB7C13730435004F851F /* CoreGraphics.framework */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		275E087713BF72C600C762B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		27ACAB7413730435004F851F /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27ACAB7813730435004F851F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		27ACAB7A13730435004F851F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -52,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		275E087513BF72C400C762B0 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				275E087613BF72C600C762B0 /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		27ACAB6913730435004F851F = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +92,7 @@
 		27ACAB7E13730435004F851F /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				275E087513BF72C400C762B0 /* iPad */,
 				27ACAB8713730435004F851F /* CalculatorAppDelegate.h */,
 				27ACAB8813730435004F851F /* CalculatorAppDelegate.m */,
 				27ACAB9813730460004F851F /* CalculatorBrain.h */,
@@ -159,6 +170,7 @@
 				27ACAB8313730435004F851F /* InfoPlist.strings in Resources */,
 				27ACAB8C13730435004F851F /* MainWindow.xib in Resources */,
 				27ACAB9213730435004F851F /* CalculatorViewController.xib in Resources */,
+				275E087813BF72C600C762B0 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +191,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		275E087613BF72C600C762B0 /* MainWindow-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				275E087713BF72C600C762B0 /* en */,
+			);
+			name = "MainWindow-iPad.xib";
+			sourceTree = "<group>";
+		};
 		27ACAB8113730435004F851F /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -247,7 +267,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Calculator/Calculator-Prefix.pch";
 				INFOPLIST_FILE = "Calculator/Calculator-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -260,7 +282,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Calculator/Calculator-Prefix.pch";
 				INFOPLIST_FILE = "Calculator/Calculator-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -285,6 +309,7 @@
 				27ACAB9713730435004F851F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
